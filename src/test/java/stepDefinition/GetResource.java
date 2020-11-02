@@ -13,7 +13,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 
 public class GetResource {
-    private static final String TOKEN = "ee6f110e7f76e885d302f9fe3a8582cc638d6529";
+    private static final String TOKEN = " d7baa0775dd8186b8a976680d960b1e93c0faed7";
     private RequestSpecification requestSpecification;
     private Response responseSpecification;
 
