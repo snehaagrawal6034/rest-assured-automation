@@ -13,7 +13,7 @@ pipeline {
 
             steps {
                 withMaven {
-                    sh 'mvn test'
+                    sh ' mvn test -DTOKEN_NUMBER={github_token}'
                 }
             }
         }

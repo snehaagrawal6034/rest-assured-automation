@@ -13,12 +13,15 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 
 public class GetResource {
-    private static final String TOKEN = " d7baa0775dd8186b8a976680d960b1e93c0faed7";
+    private String token;
     private RequestSpecification requestSpecification;
     private Response responseSpecification;
 
+
     @Given("^I hit the github base API URL$")
     public void givenBaseURI() {
+        token = System.getProperty("TOKEN_NUMBER");
+        System.out.println(token);
         requestSpecification = given()
                 .baseUri("https://api.github.com/");
 
@@ -27,7 +30,7 @@ public class GetResource {
     @When("^I send the path using HTTP method$")
     public void validInput() {
         responseSpecification = requestSpecification.when()
-                .header(new Header("Authorization", "token "+TOKEN))
+                .header(new Header("Authorization", "token "+token))
                 .queryParam("url","dad").get("/user");
     }
 
@@ -52,7 +55,7 @@ public class GetResource {
     @When("^I send the valid optional parameters$")
     public void validOptParamInput() {
         responseSpecification =
-                requestSpecification.when().header(new Header("Authorization", "token "+TOKEN))
+                requestSpecification.when().header(new Header("Authorization", "token "+token))
                         .queryParam("sort","created").get("user/repos");
     }
 
