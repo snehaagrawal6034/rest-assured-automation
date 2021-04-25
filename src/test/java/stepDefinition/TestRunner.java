@@ -9,6 +9,6 @@ import java.io.File;
 
 @RunWith(Cucumber.class)
     @CucumberOptions(features="src/test/resources",plugin = { "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:", "summary"},
-            glue= {"stepDefinition"}, strict = true)
+            glue= {"stepDefinition"}, strict = true,tags="@RunOnly")
     public class TestRunner {
     }
