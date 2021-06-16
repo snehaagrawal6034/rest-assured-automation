@@ -3,7 +3,6 @@ Feature: Validating Github user repositories
   Background:
     Given I hit the github base API URL for Post
 
-
   Scenario: Verify unprocessable entity error
     When I send the path and invalid body using HTTP method
     Then I validate status code 422

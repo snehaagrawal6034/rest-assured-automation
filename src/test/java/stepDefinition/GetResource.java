@@ -1,16 +1,19 @@
 package stepDefinition;
 
+import com.google.gson.JsonObject;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.http.Header;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import models.FormData;
+import models.RandomData;
 import org.junit.Assert;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchema;
@@ -52,8 +55,15 @@ public class GetResource {
     }
 
     @Then("^I validate the positive response$")
-    public void validAuthResponse(List<FormData> formData) {
-        System.out.println(formData);
+    public void aavalidAuthResponse(List<RandomData> randomData) {
+        JsonObject jsonObject  = new JsonObject();
+        // gson, moshi, jackson - serialization, deserialization
+        // serialization - object to json string
+        // deseraizalition - json string to object
+        // network call - you get json string in response, then you deserialize in object
+        // object - convert it into json string and send it as body.
+//        given().body()
+        System.out.println(randomData);
         System.out.println(hashCode());
         responseSpecification.then()
                 .log()
@@ -124,4 +134,19 @@ public class GetResource {
                 .then().time(lessThan(2000L));
     }
 
+    private List<RandomData> response = new ArrayList<>();
+    @When("I test the datatable")
+    public void datatable(List<RandomData> randomData) {
+
+        response = apiToBeTested(randomData);
+    }
+
+    private List<RandomData> apiToBeTested(List<RandomData> randomData) {
+        return randomData.stream().map(randomData1 -> new RandomData(randomData1.arbit+"9", randomData1.value)).collect(Collectors.toList());
+    }
+
+    @Then("I see the following")
+    public void assertEquals(List<RandomData> expected) {
+        Assert.assertEquals(expected, response);
+    }
 }

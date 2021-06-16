@@ -1,13 +1,22 @@
 Feature: Validating Github user repositories
 
-  Background:
-    Given I hit the github base API URL
+#  Background:
+#    Given I hit the github base API URL
 
   @RunOnly
+  Scenario: Datatable test
+    When I test the datatable
+      | Arbit     | Value |
+      | 1     | harshit |
+      | 2     | sneha |
+    Then I see the following
+      | Arbit     | Value |
+      | 19     | harshit |
+      | 29     | sneha |
+
   Scenario: Verify if user repository is returned successfully
     When I send the path using HTTP method
     Then I validate the positive response
-      | Arbit | Value |
       | 1     | arbit |
       | 2     | arbit2 |
 

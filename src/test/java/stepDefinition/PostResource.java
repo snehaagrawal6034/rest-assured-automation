@@ -6,13 +6,9 @@ import io.cucumber.java.en.When;
 import io.restassured.http.Header;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import models.FormData;
 import models.User;
-import models.UserResponse;
 
 import java.io.File;
-import java.net.URI;
-import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
