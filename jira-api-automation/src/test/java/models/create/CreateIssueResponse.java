@@ -1,5 +1,7 @@
 package models.create;
 
+import com.google.gson.annotations.SerializedName;
+
 public class CreateIssueResponse {
     private final String key;
 

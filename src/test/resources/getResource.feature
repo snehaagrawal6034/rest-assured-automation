@@ -3,7 +3,6 @@ Feature: Validating Github user repositories
 #  Background:
 #    Given I hit the github base API URL
 
-  @RunOnly
   Scenario: Datatable test
     When I test the datatable
       | Arbit     | Value |

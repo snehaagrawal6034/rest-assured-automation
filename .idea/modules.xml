@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/RestAssuredAutomationUsingCucumber.iml" filepath="$PROJECT_DIR$/RestAssuredAutomationUsingCucumber.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jira-api-automation/jira-api-automation.iml" filepath="$PROJECT_DIR$/jira-api-automation/jira-api-automation.iml" />
+    </modules>
+  </component>
+</project>

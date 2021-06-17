@@ -1,0 +1,35 @@
+-------------------------------------------------------------------------------
+Test set: stepDefinition.TestRunner
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 7.923 sec <<< FAILURE!
+Verify if user repository is returned successfully(Validating Github user repositories)  Time elapsed: 0.477 sec  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class org.codehaus.groovy.reflection.ReflectionCache
+	at org.codehaus.groovy.runtime.dgmimpl.NumberNumberMetaMethod.<clinit>(NumberNumberMetaMethod.java:33)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:481)
+	at org.codehaus.groovy.runtime.metaclass.MetaClassRegistryImpl.createMetaMethodFromClass(MetaClassRegistryImpl.java:258)
+	at org.codehaus.groovy.runtime.metaclass.MetaClassRegistryImpl.<init>(MetaClassRegistryImpl.java:111)
+	at org.codehaus.groovy.runtime.metaclass.MetaClassRegistryImpl.<init>(MetaClassRegistryImpl.java:86)
+	at groovy.lang.GroovySystem.<clinit>(GroovySystem.java:36)
+	at org.codehaus.groovy.runtime.InvokerHelper.<clinit>(InvokerHelper.java:86)
+	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.createMap(ScriptBytecodeAdapter.java:635)
+	at io.restassured.internal.ResponseParserRegistrar.<init>(ResponseParserRegistrar.groovy)
+	at io.restassured.RestAssured.<clinit>(RestAssured.java:346)
+	at stepDefinition.GetResource.givenBaseURI(GetResource.java:25)
+	at ✽.I hit the github base API URL(file:///Users/snehaagrawal/Desktop/RestAssuredAutomationUsingCucumber/src/test/resources/getResource.feature:4)
+
+Verify if user repository is not returned for incorrect authentication(Validating Github user repositories)  Time elapsed: 0.006 sec  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class io.restassured.RestAssured
+	at stepDefinition.GetResource.givenBaseURI(GetResource.java:25)
+	at ✽.I hit the github base API URL(file:///Users/snehaagrawal/Desktop/RestAssuredAutomationUsingCucumber/src/test/resources/getResource.feature:4)
+
+Verify optional parameters(Validating Github user repositories)  Time elapsed: 0.006 sec  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class io.restassured.RestAssured
+	at stepDefinition.GetResource.givenBaseURI(GetResource.java:25)
+	at ✽.I hit the github base API URL(file:///Users/snehaagrawal/Desktop/RestAssuredAutomationUsingCucumber/src/test/resources/getResource.feature:4)
+
+
+

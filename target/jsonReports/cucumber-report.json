@@ -1,0 +1,181 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "line": 3,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 596000000,
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "I hit the github base API URL",
+            "match": {
+              "location": "stepDefinition.GetResource.givenBaseURI()"
+            },
+            "keyword": "Given "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-11-02T15:13:37.117Z",
+        "line": 6,
+        "name": "Verify if user repository is returned successfully",
+        "description": "",
+        "id": "validating-github-user-repositories;verify-if-user-repository-is-returned-successfully",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 1944000000,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "I send the path using HTTP method",
+            "match": {
+              "location": "stepDefinition.GetResource.validInput()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 602000000,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "I validate the positive response",
+            "match": {
+              "location": "stepDefinition.GetResource.validAuthResponse()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "line": 3,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 1000000,
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "I hit the github base API URL",
+            "match": {
+              "location": "stepDefinition.GetResource.givenBaseURI()"
+            },
+            "keyword": "Given "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-11-02T15:13:40.336Z",
+        "line": 10,
+        "name": "Verify if user repository is not returned for incorrect authentication",
+        "description": "",
+        "id": "validating-github-user-repositories;verify-if-user-repository-is-not-returned-for-incorrect-authentication",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 411000000,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "I send the path using HTTP method without authentication",
+            "match": {
+              "location": "stepDefinition.GetResource.invalidInput()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 3000000,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "I validate the negative response",
+            "match": {
+              "location": "stepDefinition.GetResource.invalidAuthResponse()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "line": 3,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 1000000,
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "I hit the github base API URL",
+            "match": {
+              "location": "stepDefinition.GetResource.givenBaseURI()"
+            },
+            "keyword": "Given "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-11-02T15:13:40.754Z",
+        "line": 14,
+        "name": "Verify optional parameters",
+        "description": "",
+        "id": "validating-github-user-repositories;verify-optional-parameters",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 680000000,
+              "status": "passed"
+            },
+            "line": 15,
+            "name": "I send the valid optional parameters",
+            "match": {
+              "location": "stepDefinition.GetResource.validOptParamInput()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 163000000,
+              "status": "passed"
+            },
+            "line": 16,
+            "name": "I validate the response",
+            "match": {
+              "location": "stepDefinition.GetResource.validOptParamResponse()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "Validating Github user repositories",
+    "description": "",
+    "id": "validating-github-user-repositories",
+    "keyword": "Feature",
+    "uri": "file:src/test/java/features/getResource.feature",
+    "tags": []
+  }
+]

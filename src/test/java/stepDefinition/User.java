@@ -1,4 +1,4 @@
-package models;
+package stepDefinition;
 
 import java.util.HashMap;
 import java.util.Map;

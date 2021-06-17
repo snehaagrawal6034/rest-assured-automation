@@ -1,6 +1,9 @@
 package stepDef;
 
 import com.google.gson.Gson;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
 import io.restassured.http.Header;
 import io.restassured.response.Response;
@@ -16,66 +19,92 @@ import static io.restassured.RestAssured.given;
 
 public class JiraIssue {
 
-    private String token = "Basic c25laGEuYWdyYXdhbDYwMzRAZ21haWwuY29tOkRqTHBVZURValNoVzhaeUFBSXRkMUQxMQ==";
+    private String token;
     private RequestSpecification requestSpecification;
     private Response responseSpecification;
+    private CreateIssueRequestBody issue;
+    CreateIssueResponse createIssueResponse;
 
-
-    @Test
-    public void createAndUpdateIssue() {
-        String token = "Basic " + System.getenv("JIRAtoken");
-        CreateIssueRequestBody issue = new CreateIssueRequestBody(new Fields("Creating of an issue using project keys and issue type names using the REST API", new Issuetype("Task"), new Project("DESK"), "abcd"));
-        String createIssueResponseSerialized = given()
-                .baseUri("https://jira6034.atlassian.net")
-                .body(issue)
-                .when()
-                .header("content-type", "application/json")
-                .header("Authorization", token)
-                .post(URI.create("/rest/api/2/issue/")).then().statusCode(201).extract().body().asString();
-
-        // deserialization - here createIssueResponseSerialized(serialized string ) is getting coverted into CreateIssueResponse (deserialized) object
-        CreateIssueResponse createIssueResponse = new Gson().fromJson(createIssueResponseSerialized, CreateIssueResponse.class);
-        UpdateIssueRequestBody updateIssueRequestBody = new UpdateIssueRequestBody(new models.update.Fields("d1", "s1"));
-
-        // serialization
-        String body = new Gson().toJson(updateIssueRequestBody);
-        System.out.println(body);
-        given()
-                .baseUri("https://jira6034.atlassian.net")
-                .body(body)
-                .when()
-                .header("content-type", "application/json")
-                .header("Authorization", token)
-                .put(URI.create("/rest/api/2/issue/" + createIssueResponse.getKey())).then().statusCode(204);
+    @Given("^I hit the JIRA base API URL$")
+    public void getBaseURI() {
+        token = "Basic " + System.getenv("JIRAtoken");
+        requestSpecification = given()
+                .baseUri("https://jira6034.atlassian.net");
     }
 
-    @Test
+    @When("^I send the path and valid body using HTTP method$")
+    public void createIssue() {
+        issue = new CreateIssueRequestBody(new Fields("Creating of an issue using project keys and issue type names using the REST API", new Issuetype("Task"), new Project("DESK"), "abcd"));
+        responseSpecification = requestSpecification.body(issue)
+                .when()
+                .header("content-type", "application/json")
+                .header("Authorization", token)
+                .post(URI.create("/rest/api/2/issue/"));
+    }
+
+    @Then("^I validate issue created successfully with status code 201$")
+    public void createIssueSuccess() {
+        responseSpecification.then().statusCode(201);
+        String createIssueResponseSerialized = responseSpecification.then().extract().body().asString();
+        // deserialization - here createIssueResponseSerialized(serialized string ) is getting coverted into CreateIssueResponse (deserialized) object
+        createIssueResponse = new Gson().fromJson(createIssueResponseSerialized, CreateIssueResponse.class);
+    }
+
+    @When("^I change body using HTTP method$")
+    public void updateIssue() {
+        UpdateIssueRequestBody updateIssueRequestBody = new UpdateIssueRequestBody(new models.update.Fields("d1", "s1"));
+        // serialization
+        String updatedBody = new Gson().toJson(updateIssueRequestBody);
+        responseSpecification = requestSpecification.body(updatedBody)
+                .when()
+                .header("content-type", "application/json")
+                .header("Authorization", token)
+                .put("/rest/api/2/issue/" + createIssueResponse.getKey());
+    }
+
+    @Then("^I validate issue updated successfully with status code 204$")
+    public void updateIssueSuccess() {
+        responseSpecification.then().statusCode(204);
+    }
+
+    @When("^I try to fetch the issue$")
     public void fetchIssue() {
-        String token = "Basic " + System.getenv("JIRAtoken");
-        System.out.println(token);
-        requestSpecification = given()
-                .baseUri("https://jira6034.atlassian.net/");
         responseSpecification = requestSpecification.when()
                 .header(new Header("Authorization", token))
-                .get("/rest/api/latest/issue/DESK-12");
-        responseSpecification.then()
-                .log()
-                .all()
-                .statusCode(200);
+                .get("/rest/api/latest/issue/" + createIssueResponse.getKey());
     }
 
-    @Test
+    @Then("^I validate issue fetched successfully with status code 200$")
+    public void fetchIssueSuccess() {
+        responseSpecification.then().statusCode(200);
+    }
+
+    @When("^I add an attachment to the issue$")
     public void createAttachementonExistingIssue() {
-        String token = "Basic " + System.getenv("JIRAtoken");
-        String createIssueResponseSerialized = RestAssured.given()
-                .baseUri("https://jira6034.atlassian.net")
-                .when()
+        responseSpecification = requestSpecification.when()
                 .multiPart(new File("src/test/resources/baby.jpeg"))
                 .header("content-type", "multipart/form-data; boundary=<calculated when request is sent>")
                 .header("Authorization", token)
                 .header("X-Atlassian-Token", "no-check")
-                .post("/rest/api/3/issue/DESK-12/attachments")
-                .then().statusCode(200).extract().body().asString();
+                .post("/rest/api/3/issue/" + createIssueResponse.getKey() + "/attachments");
     }
+
+    @Then("^I validate attachment added successfully$")
+    public void createAttachementonSuccess() {
+        responseSpecification.then().statusCode(200).extract().body().asString();
+    }
+
+//    @Test
+//    public void createAttachementonExistingIssue1() {
+//        String createIssueResponseSerialized = RestAssured.given()
+//                .baseUri("https://jira6034.atlassian.net")
+//                .when()
+//                .multiPart(new File("src/test/resources/baby.jpeg"))
+//                .header("content-type", "multipart/form-data; boundary=<calculated when request is sent>")
+//                .header("Authorization", token)
+//                .header("X-Atlassian-Token", "no-check")
+//                .post("/rest/api/3/issue/DESK-12/attachments")
+//                .then().statusCode(200).extract().body().asString();
+//    }
 }
 
