@@ -1,4 +1,3 @@
-.DS_Store
-	.idea/
+.idea/
 	RestAssuredAutomationUsingCucumber.iml
 	target/
