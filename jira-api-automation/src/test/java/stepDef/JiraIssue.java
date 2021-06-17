@@ -5,8 +5,8 @@ import io.restassured.RestAssured;
 import io.restassured.http.Header;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import models.models.create.*;
-import models.models.update.UpdateIssueRequestBody;
+import models.create.*;
+import models.update.UpdateIssueRequestBody;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -35,7 +35,7 @@ public class JiraIssue {
 
         // deserialization - here createIssueResponseSerialized(serialized string ) is getting coverted into CreateIssueResponse (deserialized) object
         CreateIssueResponse createIssueResponse = new Gson().fromJson(createIssueResponseSerialized, CreateIssueResponse.class);
-        UpdateIssueRequestBody updateIssueRequestBody = new UpdateIssueRequestBody(new models.models.update.Fields("d1", "s1"));
+        UpdateIssueRequestBody updateIssueRequestBody = new UpdateIssueRequestBody(new models.update.Fields("d1", "s1"));
 
         // serialization
         String body = new Gson().toJson(updateIssueRequestBody);
@@ -70,7 +70,7 @@ public class JiraIssue {
         String createIssueResponseSerialized = RestAssured.given()
                 .baseUri("https://jira6034.atlassian.net")
                 .when()
-                .multiPart(new File("src/main/resources/baby.jpeg"))
+                .multiPart(new File("src/test/resources/baby.jpeg"))
                 .header("content-type", "multipart/form-data; boundary=<calculated when request is sent>")
                 .header("Authorization", token)
                 .header("X-Atlassian-Token", "no-check")

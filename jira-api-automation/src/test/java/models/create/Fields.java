@@ -1,8 +1,9 @@
 
-package models.models.create;
+package models.create;
+
+import com.google.gson.annotations.Expose;
 
 import javax.annotation.Generated;
-import com.google.gson.annotations.Expose;
 
 @Generated("net.hexar.json2pojo")
 @SuppressWarnings("unused")
