@@ -4,7 +4,7 @@ import io.cucumber.core.api.TypeRegistry;
 import io.cucumber.core.api.TypeRegistryConfigurer;
 import io.cucumber.datatable.DataTableType;
 import io.cucumber.datatable.TableEntryTransformer;
-import models.RandomData;
+import models.models.RandomData;
 
 public class FormDataConfigurer implements TypeRegistryConfigurer {
     @Override

@@ -1,5 +1,5 @@
 
-package models.create;
+package models.models.create;
 
 import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;

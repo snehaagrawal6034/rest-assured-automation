@@ -5,15 +5,14 @@ import io.restassured.RestAssured;
 import io.restassured.http.Header;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import models.create.*;
-import models.update.UpdateIssueRequestBody;
+import models.models.create.*;
+import models.models.update.UpdateIssueRequestBody;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.net.URI;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.containsString;
 
 public class JiraIssue {
 
@@ -24,7 +23,7 @@ public class JiraIssue {
 
     @Test
     public void createAndUpdateIssue() {
-        String token = "Basic "+System.getenv("JIRAtoken");
+        String token = "Basic " + System.getenv("JIRAtoken");
         CreateIssueRequestBody issue = new CreateIssueRequestBody(new Fields("Creating of an issue using project keys and issue type names using the REST API", new Issuetype("Task"), new Project("DESK"), "abcd"));
         String createIssueResponseSerialized = given()
                 .baseUri("https://jira6034.atlassian.net")
@@ -36,7 +35,7 @@ public class JiraIssue {
 
         // deserialization - here createIssueResponseSerialized(serialized string ) is getting coverted into CreateIssueResponse (deserialized) object
         CreateIssueResponse createIssueResponse = new Gson().fromJson(createIssueResponseSerialized, CreateIssueResponse.class);
-        UpdateIssueRequestBody updateIssueRequestBody = new UpdateIssueRequestBody(new models.update.Fields("d1", "s1"));
+        UpdateIssueRequestBody updateIssueRequestBody = new UpdateIssueRequestBody(new models.models.update.Fields("d1", "s1"));
 
         // serialization
         String body = new Gson().toJson(updateIssueRequestBody);
@@ -52,7 +51,7 @@ public class JiraIssue {
 
     @Test
     public void fetchIssue() {
-        String token = "Basic "+System.getenv("JIRAtoken");
+        String token = "Basic " + System.getenv("JIRAtoken");
         System.out.println(token);
         requestSpecification = given()
                 .baseUri("https://jira6034.atlassian.net/");
@@ -67,14 +66,16 @@ public class JiraIssue {
 
     @Test
     public void createAttachementonExistingIssue() {
-        String token = "Basic "+System.getenv("JIRAtoken");
+        String token = "Basic " + System.getenv("JIRAtoken");
         String createIssueResponseSerialized = RestAssured.given()
                 .baseUri("https://jira6034.atlassian.net")
-                .multiPart(new File("src/main/resources/baby.jpeg"))
                 .when()
-                .header("content-type", "multipart/form-data")
+                .multiPart(new File("src/main/resources/baby.jpeg"))
+                .header("content-type", "multipart/form-data; boundary=<calculated when request is sent>")
                 .header("Authorization", token)
-                .post(URI.create("/rest/api/3/issue/DESK-12/attachments")).then().statusCode(200).extract().body().asString();
+                .header("X-Atlassian-Token", "no-check")
+                .post("/rest/api/3/issue/DESK-12/attachments")
+                .then().statusCode(200).extract().body().asString();
     }
 }
 

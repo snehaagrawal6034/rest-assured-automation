@@ -1,4 +1,4 @@
-package models.create;
+package models.models.create;
 
 public class CreateIssueResponse {
     private final String key;
