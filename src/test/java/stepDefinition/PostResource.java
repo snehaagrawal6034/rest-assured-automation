@@ -22,7 +22,8 @@ public class PostResource {
 
     @Given("^I hit the github base API URL for Post$")
     public void givenBaseURI() throws Exception {
-        token = System.getProperty("TOKEN_NUMBER");
+//        token = System.getProperty("TOKEN_NUMBER");
+        token = "Basic " + System.getenv("TOKEN_NUMBER");
 //        token = getToken();
         System.out.println(token);
         User user = new User("snehaagrawal6034", "testingPostUsingRestAssured", "yayyyy", true, false);

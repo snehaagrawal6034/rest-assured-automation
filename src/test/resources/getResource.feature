@@ -3,6 +3,7 @@ Feature: Validating Github user repositories
 #  Background:
 #    Given I hit the github base API URL
 
+  @RunOnly
   Scenario: Datatable test
     When I test the datatable
       | Arbit     | Value |
@@ -10,14 +11,15 @@ Feature: Validating Github user repositories
       | 2     | sneha |
     Then I see the following
       | Arbit     | Value |
-      | 19     | harshit |
-      | 29     | sneha |
+      | 19   | harshit |
+      | 29    | sneha |
 
-  Scenario: Verify if user repository is returned successfully
-    When I send the path using HTTP method
-    Then I validate the positive response
-      | 1     | arbit |
-      | 2     | arbit2 |
+#  @RunOnly
+#  Scenario: Verify if user repository is returned successfully
+#    When I send the path using HTTP method
+#    Then I validate the positive response
+#      | 1     | arbit |
+#      | 2     | arbit2 |
 
   Scenario: Verify if user repository is not returned for incorrect authentication
     When I send the path using HTTP method without authentication
@@ -36,4 +38,14 @@ Feature: Validating Github user repositories
     When I send the products path
     Then I validate the products schema
     And I validate the response time
+
+  @RunOnly
+  Scenario Outline: Example Tag test
+    When I test the example tag <Arbit1>
+    Then I test the following example tag example <Value1>
+
+    Examples:
+      | Arbit1  | Value1 |
+      | 19     | 28 |
+      | 29     | 38 |
 

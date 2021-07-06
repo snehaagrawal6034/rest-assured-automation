@@ -23,16 +23,18 @@ public class FunctionTest {
             }
         };
 
-        System.out.println(map(Arrays.asList(1,2,3), addTwoFunction));
-        System.out.println(map(Arrays.asList(1,2,3), multipltTwoFunction));
-
         Function<String, Integer> stringLengthFunction = new Function<String, Integer>() {
             @Override
             public Integer apply(String s) {
                 return s.length();
             }
         };
-        length(Arrays.asList("Sds", "SDsd"), stringLengthFunction);
+
+
+        System.out.println(map(Arrays.asList(1,2,3), addTwoFunction));
+        System.out.println(map(Arrays.asList(1,2,3), multipltTwoFunction));
+        System.out.println(length(Arrays.asList("Sds", "SDsd"), stringLengthFunction));
+
     }
 
 //    public static List<Integer> addTwo(List<Integer> integers, int k) {

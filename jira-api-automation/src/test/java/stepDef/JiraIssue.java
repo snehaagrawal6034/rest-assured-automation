@@ -10,7 +10,6 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import models.create.*;
 import models.update.UpdateIssueRequestBody;
-import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.net.URI;
@@ -53,7 +52,7 @@ public class JiraIssue {
     @When("^I change body using HTTP method$")
     public void updateIssue() {
         UpdateIssueRequestBody updateIssueRequestBody = new UpdateIssueRequestBody(new models.update.Fields("d1", "s1"));
-        // serialization
+        // serialization - this is done just for understanding , it gets coverted to Json automatically internally
         String updatedBody = new Gson().toJson(updateIssueRequestBody);
         responseSpecification = requestSpecification.body(updatedBody)
                 .when()

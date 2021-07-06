@@ -39,7 +39,8 @@ public class GetResource {
 
     @Given("^I hit the github base API URL$")
     public void givenBaseURI() throws Exception {
-        token = System.getProperty("TOKEN_NUMBER");
+        token = "Basic " + System.getenv("TOKEN_NUMBER");
+//        token = System.getProperty("TOKEN_NUMBER");
 //        token = getToken();
         System.out.println(token);
         requestSpecification = given()
@@ -54,7 +55,7 @@ public class GetResource {
     }
 
     @Then("^I validate the positive response$")
-    public void aavalidAuthResponse(List<RandomData> randomData) {
+    public void avalidAuthResponse(List<RandomData> randomData) {
         JsonObject jsonObject  = new JsonObject();
         // gson, moshi, jackson - serialization, deserialization
         // serialization - object to json string
@@ -148,4 +149,21 @@ public class GetResource {
     public void assertEquals(List<RandomData> expected) {
         Assert.assertEquals(expected, response);
     }
+
+    private int response1;
+    @When("^I test the example tag (-?\\d+)$")
+    public void datatable(int value) {
+        response1 = exampleTagToBeTested(value);
+    }
+
+    private int exampleTagToBeTested(int value) {
+        return value + 9;
+    }
+
+
+    @Then("^I test the following example tag example (-?\\d+)$")
+    public void assertEquals(int value2) {
+        Assert.assertEquals(value2, response1);
+    }
+
 }

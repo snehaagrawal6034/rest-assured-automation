@@ -8,6 +8,7 @@ Feature: Validating Github user repositories
     Then I validate status code 422
 
 #    must read - redirect
+
   Scenario: Verify if user repository is created successfully
     When I send the path and valid body using HTTP method
     Then I validate record has been created
