@@ -93,6 +93,18 @@ public class JiraIssue {
         responseSpecification.then().statusCode(200).extract().body().asString();
     }
 
+    @When("^I delete the issue$")
+    public void deleteIssue() {
+        responseSpecification = requestSpecification.when()
+                .header(new Header("Authorization", token))
+                .get("/rest/api/3/issue/" + createIssueResponse.getKey());
+    }
+
+    @Then("^I validate issue deleted successfully$")
+    public void issueDeleted() {
+        responseSpecification.then().statusCode(200).extract().body().asString();
+    }
+
 //    @Test
 //    public void createAttachementonExistingIssue1() {
 //        String createIssueResponseSerialized = RestAssured.given()
