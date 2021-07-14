@@ -6,13 +6,13 @@ Feature: Validating Github user repositories
   @RunOnly
   Scenario: Datatable test
     When I test the datatable
-      | Arbit     | Value |
+      | Arbit | Value   |
       | 1     | harshit |
-      | 2     | sneha |
+      | 2     | sneha   |
     Then I see the following
-      | Arbit     | Value |
-      | 19   | harshit |
-      | 29    | sneha |
+      | Arbit | Value   |
+      | 19    | harshit |
+      | 29    | sneha   |
 
 #  @RunOnly
 #  Scenario: Verify if user repository is returned successfully
@@ -41,11 +41,11 @@ Feature: Validating Github user repositories
 
   @RunOnly
   Scenario Outline: Example Tag test
-    When I test the example tag <Arbit1>
+    When I test the example tag <Arbit1> <Arbit2>
     Then I test the following example tag example <Value1>
 
     Examples:
-      | Arbit1  | Value1 |
-      | 19     | 28 |
-      | 29     | 38 |
+      | Arbit1 | Arbit2 | Value1 |
+      | 19     | 28     | 47     |
+      | 29     | 38     | 67     |
 

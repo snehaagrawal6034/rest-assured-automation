@@ -134,7 +134,9 @@ public class GetResource {
                 .then().time(lessThan(2000L));
     }
 
-    private List<RandomData> response = new ArrayList<>();
+    private List<RandomData> response;
+
+
     @When("I test the datatable")
     public void datatable(List<RandomData> randomData) {
 
@@ -151,14 +153,14 @@ public class GetResource {
     }
 
     private int response1;
-    @When("^I test the example tag (-?\\d+)$")
-    public void datatable(int value) {
-        response1 = exampleTagToBeTested(value);
+    @When("^I test the example tag (-?\\d+) (-?\\d+)$")
+    public void datatable(int value,int value2) {
+        response1 = value + value2;
     }
 
-    private int exampleTagToBeTested(int value) {
-        return value + 9;
-    }
+//    private int exampleTagToBeTested(int value) {
+//        return value + 9;
+//    }
 
 
     @Then("^I test the following example tag example (-?\\d+)$")
